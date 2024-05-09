@@ -1,0 +1,112 @@
+@font-face {
+  font-display: optional;
+  font-family: Netflix Sans;
+  font-weight: 100;
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff2) format("woff2"),url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff) format("woff")
+}
+
+body {
+  background-color: #181818;
+  /* background-image: url('images/add_movies.jpg'); */
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* background: linear-gradient(rgba(0, 0, 0, 0.836),rgba(0, 0, 0, 0.863)), url("images/index.jpg"); */
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+h1{
+  text-align:center;
+  font-weight: 700;
+}
+main {
+  width: 100%;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+  margin-top: 40px;
+  color: white;
+  font-family: Netflix Sans,Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+  box-sizing: border-box;
+}
+
+.container {
+  text-align: center;
+}
+
+#description {
+  font-style: italic;
+}
+
+form {
+  padding: 40px;
+  width: 90%;
+  max-width: 900px;
+  min-width: 500px;
+  height: auto;
+  background-color: rgba(255,255,255,0.13);
+  margin-top: 50px;
+  font-family: Netflix Sans,Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+  border-radius: 10px;
+  color: white;
+  text-align: left;
+  border: 2px solid rgba(255,255,255,0.1);
+  box-shadow: 0 0 40px rgba(8,7,16,0.6);
+}
+
+label {
+  display: block;
+  font-weight: 800;
+}
+
+fieldset {
+  border: none;
+  width: 100%;
+}
+
+input, select, textarea {
+  padding: 0.8em;
+  border-radius: 6px;
+  border: none;
+  width: 90%;
+  font-size: 1em;
+  margin-bottom: 30px;
+  margin-top: 4px;
+  font-family: Netflix Sans,Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+  background-color: rgba(255, 255, 255, 0.384);
+}
+
+select {
+  width: 95%;
+  background-color: rgba(255, 255, 255, 0);
+  font-weight: 300;
+
+}
+
+textarea {
+  resize: none;
+  height: 100px;
+}
+
+#textbox{
+  background-color: rgba(255,255,255,0.07);
+}
+
+input[type="submit"] {
+  width: 95%;
+  background-color: white;
+  font-size: 1.1em;
+  font-weight: 700;
+  margin-top: 20px;
+  cursor: pointer;
+  font-weight: 1000;
+}
+.textbox::placeholder {
+  color: white; /* Change placeholder color to white */
+  font-weight: 400;
+}

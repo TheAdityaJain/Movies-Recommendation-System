@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stranger Things</title>
+</head>
+<link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+<link rel="stylesheet" href="{{ url_for('static', filename='stmain.css') }}">
+<body>
+    <header>
+        <div >
+            <img src="{{ url_for('static', filename='images/bg.jpg') }}" id="Box">
+        </div>
+    </header>
+    <main>
+        <div>
+            <img src="{{ url_for('static', filename='images/1.jpg') }}" alt="Poster" height="400" align="right" id="img1">
+            
+        </div>
+        <article>
+            <!-- <h4>Overview :</h4> -->
+            <!-- <hr align="left"> -->
+            <p id="over">
+                In 1980s Indiana, a group of young friends witness<br>
+                supernatural forces and secret government exploits.<br>
+                As they search for answers,the children unravel a <br>
+                series of extraordinary mysteries.</p>
+            
+        </article>
+        <!-- <section>
+            <h4>Info :</h4>
+            Country of origin: United States<br>
+            Original language: English<br>
+            No. of seasons:	4<br>
+            No. of episodes: 34 (<a href="seasons.html">list of episodes</a>)<br>
+            <hr>
+        </section>
+        <section>
+            <h4>Release :</h4>
+            Original network: Netflix<br>
+            Original release: July 15, 2016 - present
+            <hr>
+        </section> -->
+    </main>
+    <footer>
+        <div id="nav">
+            <h4>
+            <br>
+            <li><button><a href="{{ url_for('stplot') }}"><span>Overview</span></a></li></button>
+            <li><button><a href="{{ url_for('stcast') }}" ><span>Cast</span></a></li></button>
+            <li><button><a href="{{ url_for('stseasons') }}" ><span>Seasons</span></a></li></button></h4>
+        </div>
+    </footer>
+   
+</body>
+</html>

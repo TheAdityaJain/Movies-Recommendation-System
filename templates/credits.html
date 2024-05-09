@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiki Cinema - Credits</title>
+  <link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='credits.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+</head>
+
+<body>
+  <div class="nav-wrapper">
+    <div class="grad-bar"></div>
+    <nav class="navbar">
+      <img src="{{ url_for('static', filename='images/index.png') }}" id="Box">
+      <ul class="nav no-search">
+        <li class="nav-item"><a href="{{ url_for('home') }}">Home</a></li>
+        <li class="nav-item"><a href="{{ url_for('recommender') }}">Recommendations</a></li>
+        <li class="nav-item"><a href="{{ url_for('filter') }}">Filter</a></li>
+        <li class="nav-item"><a href="{{ url_for('add') }}">Add Movies</a></li>
+        <li class="nav-item"><a href="{{ url_for('credits') }}">Credits</a></li>
+    </nav>
+  </div>
+  </div>
+  </div>
+
+  <header>
+    <h1>Credits</h1>
+  </header>
+
+  <div class="container">
+    <div class="credit">
+      <h2>Back-End (Python)</h2>
+      <ul>Atharv Chinchkar  : Flask, Filter module</ul>
+      <ul>Aditya Jain       : Flask, recommendation module, Add Movies module</ul>
+      <ul>Sneha Jagtap      : Flask , recommendation module </ul>
+      <ul>Ritesh Goyal      : Flask, Filter module</ul>
+    </div>
+    <div class="credit">
+      <h2>Front-End</h2>
+      <ul>Aditya Jain      : Add Movie, Filter</ul>
+      <ul>Atharv Chinchkar : Recommendation, Filter</ul>
+      <ul>Sneha Jagtap : Home Page</ul>
+      <ul>Ritesh Goyal : Home Page</ul>
+    </div>
+  </div>
+</body>
+
+</html>

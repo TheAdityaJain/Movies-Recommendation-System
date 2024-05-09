@@ -1,0 +1,503 @@
+@font-face {
+  font-display: optional;
+  font-family: Netflix Sans;
+  font-weight: 100;
+  src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff2) format("woff2"), url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff) format("woff")
+}
+
+/* #Box {
+  border-radius: 45px;
+  height: 60px;
+  opacity: 100%;
+  position:relative; left:80px; top:30px;
+}  */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Netflix Sans, Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+}
+
+
+/* HEADINGS */
+header {
+
+  h1,
+  p {
+    color: #fff;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    color: #000;
+    font-size: 1.3rem;
+    text-align: center;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+}
+
+
+/* BASIC SETUP */
+
+.page-wrapper {
+  width: 100%;
+  height: auto;
+}
+
+.nav-wrapper {
+  width: 100%;
+  position: -webkit-sticky;
+  /* Safari */
+  position: sticky;
+  top: 0;
+  background-color: black;
+}
+
+.grad-bar {
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(-45deg, #EE7752, #e73c3c, #236ad5, #23a2d5);
+  background-size: 400% 400%;
+  -webkit-animation: gradbar 15s ease infinite;
+  -moz-animation: gradbar 15s ease infinite;
+  animation: gradbar 15s ease infinite;
+}
+
+/* NAVBAR */
+nav{
+  background-color: #0f0f0f;
+  box-shadow: 3px 3px 5px, rgba(0,0,0,0.1);
+}
+
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  height: 80px;
+  overflow: hidden;
+}
+
+.navbar img {
+  height: 50px;
+  width: auto;
+  justify-self: start;
+  margin-left: 10px;
+}
+
+.navbar ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: flex-end;
+
+}
+
+.nav-item a {
+  height: 100%;
+  padding: 0 20px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.3s ease-out;
+  display: flex;
+}
+
+.nav-item:last-child a {
+  padding-right: 30px;
+}
+
+.nav-item a:hover {
+  color: #db0000;
+}
+
+/* KEYFRAME ANIMATIONS */
+
+@-webkit-keyframes gradbar {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@-moz-keyframes gradbar {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+@keyframes gradbar {
+  0% {
+    background-position: 0% 50%
+  }
+
+  50% {
+    background-position: 100% 50%
+  }
+
+  100% {
+    background-position: 0% 50%
+  }
+}
+
+body {
+  background-color: #181818;
+  /* background-image: url('images/index1.jpg'); */
+  height: 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /* background: linear-gradient(rgb(0, 0, 0),rgba(0, 0, 0, 0.548)), url("images/index1.jpg"); */
+  /* background: linear-gradient(rgb(0, 0, 0),rgb(47, 0, 0)); */
+  background-size: cover;
+  background-attachment: fixed;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+article {
+  h1 {
+    position: relative;
+    left: -200px;
+    font-family: Netflix Sans, Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+    color: white;
+    font-size: 30px;
+  }
+
+  .container {
+    position: relative;
+    font-family: Netflix Sans, Neue, Segoe UI, Roboto, Ubuntu, sans-serif;
+    max-width: 800px;
+    margin: auto;
+    top: 50px;
+    padding: 20px;
+  }
+
+  .carousel {
+    overflow: hidden;
+    position: relative;
+    left: -200px;
+    width: 1200px;
+    height: auto;
+  }
+
+  .carousel-inner {
+    display: flex;
+    transition: transform 0.3s ease;
+  }
+
+  .carousel-item {
+    flex: 0 0 auto;
+    width: 200px;
+    margin-right: 20px;
+    border-radius: 5px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+    /* box-shadow: 0 4px 8px 0 rgba(105,29,32, 0.2), 0 6px 20px 0 rgba(105,29,32, 0.19); */
+  }
+
+  .carousel-item:hover img {
+    transform: scale(1.1);
+  }
+
+  .overview {
+    visibility: hidden;
+    position: absolute;
+    font-size: 12px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    transition: visibility 0s, opacity 0.5s ease;
+  }
+
+  .carousel-item:hover .overview {
+    visibility: visible;
+    opacity: 1;
+    height: 100%;
+  }
+
+  .carousel-controls {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .carousel .carousel-prev,
+  .carousel .carousel-next {
+    width: 50px;
+    height: 100px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0);
+    font-size: 24px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    position: absolute;
+  }
+
+  .carousel .carousel-prev {
+      left: 0;
+  }
+
+  .carousel .carousel-next {
+      right: 0;
+  }
+
+  .carousel .carousel-prev:hover,
+  .carousel .carousel-next:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+}
+
+/***********************************************/
+/*RECOMMENDATION*/
+
+#recommendations {
+  margin-top: 20px;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.3rem;
+}
+
+img {
+  max-width: 200px;
+  height: auto;
+  margin-top: 10px;
+}
+
+.search-container {
+  text-align: center;
+  margin-top: 50px; /* Adjust as needed */
+}
+
+#movie {
+  padding: 15px;
+  width: 60%;
+  max-width: 500px; /* Limit the maximum width of the input */
+  border-radius: 20px; /* Rounded corners */
+  border: 2px solid #ccc; /* Border color */
+  font-size: 18px;
+  outline: none; /* Remove default input focus outline */
+}
+
+#movie:focus {
+  border-color: #007bff; /* Border color when input is focused */
+}
+
+button {
+  padding: 15px 25px;
+  border-radius: 20px;
+  background-color: #c1121f; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease; /* Smooth transition for background color */
+}
+
+button:hover {
+  background-color: #8d0801; /* Button background color on hover */
+}
+
+
+/***********************************************/
+
+
+/*  ------------------------------------------------------------------------------------------------------------- 
+li,button{
+  font-weight: inherit;
+  font-family: Netflix Sans,Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+  display: block;
+  background-color: rgb(25, 22, 22);
+  border: none;
+  color: #FFFFFF;
+  text-align-last:inherit;
+  font-size: 28px;
+  padding: 20px;
+  position:relative; left:-5px; top:-25px;
+  width: 250px;
+  height: 25px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  
+}
+#nav{
+  position:relative; right:-1160px; top:-20px;
+}
+
+button span {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover span {
+  padding-right: 25px;
+}
+
+button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+a {
+  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-seri;
+  color: white;
+  text-decoration: none;
+  font-size: 20px;
+} */
+
+/*
+#container{
+  height: 500px; ---
+  width: 500px; ---
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-flow: column;
+  padding-top: 50px;  ---
+  position:absolute; left:-40px; top:100px;
+}
+
+
+*/
+/* 
+.container {
+  position: relative;
+  height: 300px;
+  width: 200px;
+  margin: 70px;
+  display:inline-flex;
+  position:relative; left:50px; top:100px;
+  
+}
+.image {
+  height: 300px;
+  width: 200px;
+  display:inline-flex;
+  image-resolution:inherit;
+  position:relative; left:-50px; top:-50px;
+  box-shadow: 0 4px 8px 0 rgba(105,29,32, 0.2), 0 6px 20px 0 rgba(105,29,32, 0.19);
+  margin: 50px;
+  transform: all 0.5s;
+  transition: .5s ease;
+  backface-visibility: hidden;
+  opacity: 1;
+}  
+
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position:relative; left:-50px; top:-50px;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+  display:inline-flex;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+  display:inline-flex;
+}
+
+.container:hover .middle {
+  opacity: 1;
+  display:inline-flex;
+  
+}
+
+.div {
+  font-family: Netflix Sans,Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+  font-size: 30px;
+  padding: 16px 32px;
+  font-weight: 600;
+  position: relative;
+  top:-110px;
+  left: -40px;
+}
+.text{
+  color: white;
+  font-size: 30px;
+  position:relative; left:150px; top:-210px;
+}
+@media (max-width : 1300px) {
+index1.jpg {
+  transform: rotate(90deg);
+}
+
+} */
+
+/* #loginButton {
+position: absolute;
+top: 10px;
+right: 10px;
+padding: 10px;
+background-color: #4caf50;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+#loginButton:hover {
+background-color: #45a049;
+} */

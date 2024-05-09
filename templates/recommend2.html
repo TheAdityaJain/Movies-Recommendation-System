@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+    <style>
+        h2 {
+            padding: 20px;
+            color: white;
+        }
+
+        h1 {
+            padding: 50px;
+        }
+
+        .carousel {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 200px;
+            margin-right: 20px;
+        }
+
+        .carousel-controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .carousel-control {
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-wrapper">
+        <div class="grad-bar"></div>
+        <nav class="navbar">
+            <img src="{{ url_for('static', filename='images/index.png') }}" id="Box">
+            <ul class="nav no-search">
+                <li class="nav-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="nav-item"><a href="{{ url_for('recommender') }}">Recommendations</a></li>
+                <li class="nav-item"><a href="{{ url_for('genre') }}">Genre</a></li>
+                <li class="nav-item"><a href="{{ url_for('popularity') }}">Popularity</a></li>
+                <li class="nav-item"><a href="{{ url_for('credits') }}">Credits</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <header>
+        <h1>Get Movie Recommendations</h1>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <form id="movieForm">
+                <input type="text" id="movie" name="movie" placeholder="Search for a movie...">
+                <button type="button" onclick="getRecommendations()">Recommend</button>
+            </form>
+        </div>
+        <h2>Movie Recommendations:</h2>
+        <div id="recommendations" class="carousel">
+            <div class="carousel-inner"></div>
+            <div class="carousel-controls">
+                <button class="carousel-control carousel-prev" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-control carousel-next" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+
+        function getRecommendations() {
+            var movie = document.getElementById('movie').value;
+            fetch('/recommendations', {
+                method: 'POST',
+                body: new URLSearchParams({ 'movie': movie }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var carouselInner = document.querySelector('.carousel-inner');
+                    carouselInner.innerHTML = '';
+                    var header = document.createElement('h2');
+                    // header.textContent = 'Recommendations for ' + data.movie_name;
+                    carouselInner.appendChild(header);
+                    for (var i = 0; i < data.recommend_movie.length; i++) {
+                        var div = document.createElement('div');
+                        div.classList.add('carousel-item');
+                        var img = document.createElement('img');
+                        img.src = data.recommend_poster[i];
+                        img.alt = data.recommend_movie[i];
+                        div.appendChild(img);
+                        carouselInner.appendChild(div);
+                    }
+                    showSlides(slideIndex);
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function nextSlide() {
+            showSlides(slideIndex += 1);
+        }
+
+        function prevSlide() {
+            showSlides(slideIndex -= 1);
+        }
+
+        function showSlides(n) {
+            var slides = document.querySelectorAll('.carousel-item');
+            var maxSlides = slides.length;
+            var slidesPerPage = Math.floor(window.innerWidth / 220);
+            var maxIndex = maxSlides - slidesPerPage;
+            if (n > maxIndex) {
+                slideIndex = maxIndex;
+            }
+            if (n < 0) {
+                slideIndex = 0;
+            }
+            var slideWidth = 100 / slidesPerPage;
+            var translateX = -slideIndex * slideWidth;
+            document.querySelector('.carousel-inner').style.transform = 'translateX(' + translateX + '%)';
+        }
+
+        window.addEventListener('resize', function () {
+            showSlides(slideIndex);
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Show loading icon or image
+            var loadingIcon = document.createElement('img');
+            loadingIcon.src = '/static/images/noresult.png';
+            loadingIcon.style.display = 'block';
+            loadingIcon.style.margin = 'auto';
+            document.querySelector('.carousel-inner').appendChild(loadingIcon);
+        });
+    </script>
+</body>
+
+</html>

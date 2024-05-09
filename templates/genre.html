@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommender System</title>
+</head>
+<body>
+    <h1>Movie Recommender System</h1>
+    <form id="movieForm">
+        <label for="genre">Enter genre:</label>
+        <input type="text" id="genre" name="genre" required><br><br>
+        <label for="min_rating">Minimum rating:</label>
+        <input type="range" id="min_rating" name="min_rating" min="0" max="10" step="0.1" value="7.5" oninput="updateTextInput(this.value, 'min')">
+        <input type="text" id="minRatingValue" value="7.5" readonly><br><br>
+        <label for="max_rating">Maximum rating:</label>
+        <input type="range" id="max_rating" name="max_rating" min="0" max="10" step="0.1" value="10.0" oninput="updateTextInput(this.value, 'max')">
+        <input type="text" id="maxRatingValue" value="10.0" readonly><br><br>
+        <button type="button" onclick="getResults()">Show Results</button>
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+        function updateTextInput(val, type) {
+            var elemId = (type === 'min') ? 'minRatingValue' : 'maxRatingValue';
+            document.getElementById(elemId).value = val;
+        }
+
+        function getResults() {
+            var genre = document.getElementById('genre').value;
+            var min_rating = document.getElementById('min_rating').value;
+            var max_rating = document.getElementById('max_rating').value;
+            fetch('/results', {
+                method: 'POST',
+                body: new URLSearchParams({ 'genre': genre, 'min_rating': min_rating, 'max_rating': max_rating }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                var results = document.getElementById('results');
+                results.innerHTML = '';
+                if (data.message) {
+                    var message = document.createElement('p');
+                    message.textContent = data.message;
+                    results.appendChild(message);
+                } else {
+                    data.movies.forEach(movie => {
+                        var div = document.createElement('div');
+                        var title = document.createElement('h3');
+                        title.textContent = movie.title;
+                        var img = document.createElement('img');
+                        img.src = movie.poster;
+                        img.alt = movie.title;
+                        var rating = document.createElement('p');
+                        rating.textContent = 'Rating: ' + movie.rating;
+                        div.appendChild(title);
+                        div.appendChild(img);
+                        div.appendChild(rating);
+                        results.appendChild(div);
+                    });
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>

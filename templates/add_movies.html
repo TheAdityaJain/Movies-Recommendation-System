@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WikiCinema - Add Movie</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='add_movies.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+  </head>
+  <body>
+    <div class="nav-wrapper">
+      <div class="grad-bar"></div>
+      <nav class="navbar">
+          <img src="{{ url_for('static', filename='images/index.png') }}" id="Box">
+          <ul class="nav no-search">
+              <li class="nav-item"><a href="{{ url_for('home') }}">Home</a></li>
+              <li class="nav-item"><a href="{{ url_for('recommender') }}">Recommendations</a></li>
+              <li class="nav-item"><a href="{{ url_for('filter') }}">Filter</a></li>
+              <li class="nav-item"><a href="{{ url_for('add') }}">Add Movies</a></li>
+              <li class="nav-item"><a href="{{ url_for('credits') }}">Credits</a></li>
+          </ul>
+      </nav>
+  </div>
+    <!-- 
+    <form action="/add_movie" method="post">
+        <h1>Add Movie</h1>
+        <label><input type="text" name="id" placeholder="ID"></label>
+        <label><input type="text" name="title" placeholder="Title"></label>
+        <label><input type="text" name="genre" placeholder="Genre"></label>
+        <label><input type="text" name="original_language" placeholder="Original Language"></label>
+        <label><input type="text" name="overview" placeholder="Overview"></label>
+        <label><input type="text" name="popularity" placeholder="Popularity"></label>
+        <label><input type="text" name="release_date" placeholder="Release Date"></label>
+        <label><input type="text" name="vote_average" placeholder="Vote Average"></label>
+        <label><input type="text" name="vote_count" placeholder="Vote Count"></label>
+        <button><input type="submit" value="Submit"></button>
+        <div class="social">
+            <div>
+                <h1>Movie Added Successfully!</h1>
+                <a href="/">Add Another Movie</a>
+            </div>
+        </div>
+    </form>
+     -->
+     <main>
+    
+        <div class="container">
+           <h1 id="title">Wanna add some new movies???</h1>
+           <p id="description">Fill the below form to add movie </p>
+          
+             <form action="/add_movie" method="post">
+             <h1>Add Movie</h1>
+             <label>Movie ID<input type="text" name="id" placeholder="ID" class="textbox"></label>
+             <label>Title<br><input type="text" name="title" placeholder="Title" class="textbox"></label>
+             <label>Genre<input type="text" name="genre" placeholder="Genre" class="textbox"></label>
+             <label>Original Language<input type="text" name="original_language" placeholder="Original Language" class="textbox"></label>
+             <label>Overview<input type="text" name="overview" placeholder="Overview" class="textbox"></label>
+             <label>Popularity<input type="text" name="popularity" placeholder="Popularity" class="textbox"></label>
+             <label>Release Date<input type="text" name="release_date" placeholder="YYYY-MM-DD" class="textbox"></label>
+             <label>Rating<input type="text" name="vote_average" placeholder="Vote Average" class="textbox"></label>
+             <label>Vote Count<input type="text" name="vote_count" placeholder="Vote Count" class="textbox"></label>
+             <input type="submit" value="Submit">
+         </form>
+          
+         </div>
+         
+       </main>
+  </body>
+</html>

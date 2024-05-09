@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title> Movies Recommendation System </title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">		 
+	</head>
+    <link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+	<body></br></br></br></br></br>
+        <video autoplay muted loop id="myVideo">
+            <source src="{{ url_for('static', filename='images/bgv.mp4') }}" type="video/mp4">
+        </video>
+
+        <article>
+            <p id="over">
+                Still thinking about<br>
+                What to watch?<br>
+                Dive into the world of<br>
+                Entertaiment
+            </p>
+        </article>
+
+		<form action="{{ url_for('register') }}" method="post" class="form_r">
+			<h3>Register Here</h3>
+            <div class="msg">{{ msg }}</div>
+            <label for="username">Username</label>
+			<input id="username" name="username" type="text" placeholder="Username" class="textbox"/>
+                    
+            <label for="username">Password</label>
+			<input id="password" name="password" type="password" placeholder="Password" class="textbox"/>
+                    
+            <label for="username">Email ID</label>
+			<input id="email" name="email" type="text" placeholder="Email ID" class="textbox"/>
+					
+            <button>Register</button>
+
+            <div class="social">
+                <div>
+                    <p class="bottom">Already have an account? <a class="bottom" href="{{url_for('login')}}">Sign In here</a></p>
+                </div>
+            </div>
+		</form>
+	</body>
+</html>

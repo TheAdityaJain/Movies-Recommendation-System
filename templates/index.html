@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WikiCinema - Home</title>
+</head>
+<link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+<body>
+    <header>
+        <div class="page-wrapper">
+            <div class="nav-wrapper">
+                <div class="grad-bar"></div>
+                <nav class="navbar">
+                    <img src="{{ url_for('static', filename='images/index.png') }}" id="Box">
+                    <ul class="nav no-search">
+                        <li class="nav-item"><a href="{{ url_for('home') }}">Home</a></li>
+                        <li class="nav-item"><a href="{{ url_for('recommender') }}">Recommendations</a></li>
+                        <li class="nav-item"><a href="{{ url_for('filter') }}">Filter</a></li>
+                        <li class="nav-item"><a href="{{ url_for('add') }}">Add Movies</a></li>
+                        <li class="nav-item"><a href="{{ url_for('credits') }}">Credits</a></li>
+                </nav>
+            </div>
+        </div>
+        </div>
+    </header>
+
+    <article>
+        <div class="container">
+            <h1>Top Rated Movies</h1>
+
+            <!-- Rating-based movie recommendations carousel -->
+            <div id="rating_carousel" class="carousel">
+                <div class="carousel-inner">
+                    {% for movie in rating_movies %}
+                    <div class="carousel-item">
+                        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+                        <div class="overview">
+                            <br>
+                            <h3>{{ movie.title }}</h3>
+                            <p>{{ movie.overview }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-control carousel-prev">&#10094;</button>
+                    <button class="carousel-control carousel-next">&#10095;</button>
+                </div>
+            </div>
+            <h1>Most Popular Movies</h1>
+            <!-- Popularity-based movie recommendations carousel -->
+            <div id="popularity_carousel" class="carousel" style="margin-top: 50px;">
+                <div class="carousel-inner">
+                    {% for movie in popularity_movies %}
+                    <div class="carousel-item">
+                        <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+                        <div class="overview">
+                            <br>
+                            <h3>{{ movie.title }}</h3>
+                            <p>{{ movie.overview }}</p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="carousel-controls">
+                    <button class="carousel-control carousel-prev">&#10094;</button>
+                    <button class="carousel-control carousel-next">&#10095;</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                // Get all carousels
+                var carousels = document.querySelectorAll('.carousel');
+
+                // Loop through each carousel
+                carousels.forEach(function (carousel) {
+                    var items = carousel.querySelectorAll('.carousel-item');
+                    var totalItems = items.length;
+                    var currentIndex = 0;
+                    var itemWidth = items[0].offsetWidth + parseInt(getComputedStyle(items[0]).marginRight);
+                    var visibleItems = Math.floor(carousel.offsetWidth / itemWidth);
+
+                    // Add event listeners for next and previous buttons
+                    carousel.querySelector('.carousel-next').addEventListener('click', function () {
+                        if (currentIndex < totalItems - visibleItems) {
+                            currentIndex++;
+                            updateCarousel();
+                        }
+                    });
+
+                    carousel.querySelector('.carousel-prev').addEventListener('click', function () {
+                        if (currentIndex > 0) {
+                            currentIndex--;
+                            updateCarousel();
+                        }
+                    });
+
+                    // Update the carousel display based on the current index
+                    function updateCarousel() {
+                        var offset = -currentIndex * itemWidth;
+                        carousel.querySelector('.carousel-inner').style.transform = 'translateX(' + offset + 'px)';
+                    }
+                });
+            });
+        </script>
+    </article>
+
+</body>
+
+</html>

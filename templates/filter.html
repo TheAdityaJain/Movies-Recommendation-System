@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WikiCinema - Filter</title>
+
+    <style>
+        h1 {
+            padding: 50px;
+        }
+
+        label {
+            color: white;
+            font-size: 25px;
+        }
+
+        .filters {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+
+        .rating-slider {
+            width: 350px;
+        }
+
+        .rating-slider-container {
+            margin: 10px 0;
+        }
+
+
+        .rating-slider input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            background: #d3d3d3;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
+            transition: opacity .2s;
+            border-radius: 10px;
+        }
+
+        .rating-slider input[type="range"]:hover {
+            opacity: 1;
+        }
+
+        .rating-slider input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .rating-slider input[type="range"]::-moz-range-thumb {
+            width: 30px;
+            height: 30px;
+            background: #4CAF50;
+            cursor: pointer;
+            border-radius: 50%;
+        }
+
+        .output {
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .carousel {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .carousel-inner {
+            display: flex;
+            /* Ensure items are displayed horizontally */
+            transition: transform 0.5s ease;
+            flex-wrap: nowrap;
+            /* Prevent items from wrapping to the next line */
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 200px;
+            margin-right: 20px;
+        }
+
+        .carousel-controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .carousel-control {
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+        }
+
+        .carousel-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .rating-value {
+            background: none;
+            color: white;
+            /* Adjust text color as needed */
+            font-size: 16px;
+            /* Adjust font size as needed */
+            margin-left: 10px;
+            /* Adjust spacing as needed */
+        }
+
+        .rating-message {
+            margin-top: 30px;
+            color: white;
+            font-size: 24px;
+            /* Adjust the font size as needed */
+        }
+    </style>
+</head>
+
+<link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
+<body>
+    <div class="nav-wrapper">
+        <div class="grad-bar"></div>
+        <nav class="navbar">
+            <img src="{{ url_for('static', filename='images/index.png') }}" id="Box">
+            <ul class="nav no-search">
+                <li class="nav-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="nav-item"><a href="{{ url_for('recommender') }}">Recommendations</a></li>
+                <li class="nav-item"><a href="{{ url_for('filter') }}">Filter</a></li>
+                <li class="nav-item"><a href="{{ url_for('add') }}">Add Movies</a></li>
+                <li class="nav-item"><a href="{{ url_for('credits') }}">Credits</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <header>
+        <h1>Filter by Genre or Popularity</h1>
+    </header>
+
+    <div class="container">
+        <div class="search-container">
+            <form id="movieForm">
+                <input type="text" id="movie" name="movie" placeholder="Enter Genre...">
+                <button type="button" onclick="filterByRating()">Filter by Rating</button>
+                <button type="button" onclick="filterByPopularity()">Filter by Popularity</button>
+                <div class="filters">
+                    <div class="rating-slider-container">
+                        <label for="ratingRangeMin">Min:</label>
+                        <div class="rating-slider">
+                            <input type="range" id="min_rating" name="min_rating" min="0" max="10" step="0.1" value="0"
+                                oninput="updateTextInput(this.value, 'min')"><br><br>
+                            <output for="ratingRangeMin" id="minRatingValue" class="rating-value">0</output>
+
+                        </div>
+                    </div>
+
+                    <div class="rating-slider-container">
+                        <label for="ratingRangeMax">Max:</label>
+                        <div class="rating-slider">
+                            <input type="range" id="max_rating" name="max_rating" min="0" max="10" step="0.1" value="10"
+                                oninput="updateTextInput(this.value, 'max')"><br><br>
+                            <output for="ratingRangeMax" id="maxRatingValue" class="rating-value">10</output>
+
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+            <p id="message" class="rating-message"></p>
+
+            <div id="results"></div>
+
+        </div>
+        <br>
+        <br>
+        <div id="recommendations" class="carousel">
+            <div class="carousel-inner">
+                {% for movie in rating_movies %}
+                <div class="carousel-item">
+                    <img src="{{ movie.poster_url }}" alt="{{ movie.title }}">
+                </div>
+                {% endfor %}
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-control carousel-prev" onclick="prevSlide()">&#10094;</button>
+                <button class="carousel-control carousel-next" onclick="nextSlide()">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateTextInput(val, type) {
+            var elemId = (type === 'min') ? 'minRatingValue' : 'maxRatingValue';
+            document.getElementById(elemId).value = val;
+        }
+
+        let slideIndex = 0;
+
+        function filterByRating() {
+            fetch('/results', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'genre': document.getElementById('movie').value,
+                    'min_rating': document.getElementById('min_rating').value,
+                    'max_rating': document.getElementById('max_rating').value
+                }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const message = data.message;
+                    const carouselInner = document.querySelector('.carousel-inner');
+                    carouselInner.innerHTML = ''; // Clear previous content
+                    document.getElementById('message').textContent = message;
+
+                    if ('movies' in data && Array.isArray(data.movies) && data.movies.length > 0) {
+                        data.movies.forEach(movie => {
+                            const carouselItem = document.createElement('div');
+                            carouselItem.classList.add('carousel-item');
+                            const img = document.createElement('img');
+                            img.src = movie.poster;
+                            img.alt = movie.title;
+                            carouselItem.appendChild(img);
+                            carouselInner.appendChild(carouselItem);
+                        });
+
+                        // After updating the carousel, reset the slide index and show the first slide
+                        slideIndex = 0;
+                        showSlides(slideIndex);
+
+                        // Show carousel controls
+                        document.querySelector('.carousel-controls').style.display = 'block';
+                    } else {
+                        // Handle case when no movies are found
+                        console.log('No movies found');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function filterByPopularity() {
+            fetch('/results_popu', {
+                method: 'POST',
+                body: new URLSearchParams({
+                    'genre': document.getElementById('movie').value,
+                    'min_rating': document.getElementById('min_rating').value,
+                    'max_rating': document.getElementById('max_rating').value
+                }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const message = data.message;
+                    const carouselInner = document.querySelector('.carousel-inner');
+                    carouselInner.innerHTML = ''; // Clear previous content
+                    document.getElementById('message').textContent = message;
+
+                    if ('movies' in data && Array.isArray(data.movies) && data.movies.length > 0) {
+                        data.movies.forEach(movie => {
+                            const carouselItem = document.createElement('div');
+                            carouselItem.classList.add('carousel-item');
+                            const img = document.createElement('img');
+                            img.src = movie.poster;
+                            img.alt = movie.title;
+                            carouselItem.appendChild(img);
+                            carouselInner.appendChild(carouselItem);
+                        });
+
+                        // After updating the carousel, reset the slide index and show the first slide
+                        slideIndex = 0;
+                        showSlides(slideIndex);
+
+                        // Show carousel controls
+                        document.querySelector('.carousel-controls').style.display = 'block';
+                    } else {
+                        // Handle case when no movies are found
+                        console.log('No movies found');
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+
+        // Function to show the previous slide
+        function prevSlide() {
+            showSlides(slideIndex -= 1);
+        }
+
+        // Function to show the next slide
+        function nextSlide() {
+            showSlides(slideIndex += 1);
+        }
+
+        // Function to display slides based on index
+        function showSlides(n) {
+            var slides = document.querySelectorAll('.carousel-item');
+            var maxSlides = slides.length;
+            var slidesPerPage = Math.floor(window.innerWidth / 220);
+            var maxIndex = maxSlides - slidesPerPage;
+            if (n > maxIndex) {
+                slideIndex = maxIndex;
+            }
+            if (n < 0) {
+                slideIndex = 0;
+            }
+            var slideWidth = 100 / slidesPerPage;
+            var translateX = -slideIndex * slideWidth;
+            document.querySelector('.carousel-inner').style.transform = 'translateX(' + translateX + '%)';
+        }
+
+        window.addEventListener('resize', function () {
+            showSlides(slideIndex);
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Show loading icon or image
+            var loadingIcon = document.createElement('img');
+            loadingIcon.src = '/static/images/noresult.png';
+            loadingIcon.style.display = 'block';
+            loadingIcon.style.margin = 'auto';
+            document.querySelector('.carousel-inner').appendChild(loadingIcon);
+        });
+    </script>
+
+</body>
+
+</html>

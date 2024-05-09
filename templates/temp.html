@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Recommendations</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+    <link rel="stylesheet" href="{{url_for('static', filename='index.css')}}">
+    <style>
+        h2 {
+            color: white;
+        }
+
+        h1 {
+            padding: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav-wrapper">
+        <div class="grad-bar"></div>
+        <nav class="navbar">
+            <img src="{{ url_for('static', filename='images/index.png') }}" id="Box">
+            <ul class="nav no-search">
+                <li class="nav-item"><a href="{{ url_for('home') }}">Home</a></li>
+                <li class="nav-item"><a href="{{ url_for('recommender') }}">Recommendations</a></li>
+                <li class="nav-item"><a href="{{ url_for('genre') }}">Genre</a></li>
+                <li class="nav-item"><a href="{{ url_for('popularity') }}">Popularity</a></li>
+                <li class="nav-item"><a href="{{ url_for('credits') }}">Credits</a></li>
+        </nav>
+    </div>
+    </div>
+    </div>
+    <header>
+        <h1>Get Movie Recommendations</h1>
+    </header>
+
+    <div class="container">
+
+        <div class="search-container">
+            <form id="movieForm">
+                <input type="text" id="movie" name="movie" placeholder="Search for a movie...">
+                <button type="button" onclick="getRecommendations()">Recommend</button>
+            </form>
+        </div>
+        <div id="recommendations" class="carousel">
+            <div class="carousel-inner">
+            </div>
+            <div class="carousel-controls">
+                <button class="carousel-control carousel-prev">&#10094;</button>
+                <button class="carousel-control carousel-next">&#10095;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- <script>
+        function getRecommendations() {
+            var movie = document.getElementById('movie').value;
+            fetch('/recommendations', {
+                method: 'POST',
+                body: new URLSearchParams({ 'movie': movie }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var recommendations = document.getElementById('recommendations');
+                    recommendations.innerHTML = '';
+                    var header = document.createElement('h2');
+                    header.textContent = 'Recommendations for ' + data.movie_name;
+                    recommendations.appendChild(header);
+                    for (var i = 0; i < data.recommend_movie.length; i++) {
+                        var div = document.createElement('div');
+                        var title = document.createElement('h3');
+                        title.textContent = data.recommend_movie[i];
+                        var img = document.createElement('img');
+                        img.src = data.recommend_poster[i];
+                        img.alt = data.recommend_movie[i];
+                        div.appendChild(title);
+                        div.appendChild(img);
+                        recommendations.appendChild(div);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+    <div id="rating_carousel" class="carousel">
+        <div class="carousel-inner">
+            {% for movie in recommend_poster %}
+            <div class="carousel-item">
+                <img src="{{ movie.poster_url }}">
+                <div class="overview">
+                    <br>
+                    <h3>{{ movie.title }}</h3>
+                    <p>{{ movie.overview }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="carousel-controls">
+            <button class="carousel-control carousel-prev">&#10094;</button>
+            <button class="carousel-control carousel-next">&#10095;</button>
+        </div>
+    </div> -->
+
+    <script>
+        function getRecommendations() {
+            var movie = document.getElementById('movie').value;
+            fetch('/recommendations', {
+                method: 'POST',
+                body: new URLSearchParams({ 'movie': movie }),
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    var recommendations = document.getElementById('recommendations');
+                    var carouselInner = recommendations.querySelector('.carousel-inner');
+                    carouselInner.innerHTML = '';
+                    var header = document.createElement('h2');
+                    header.textContent = 'Recommendations for ' + data.movie_name;
+                    recommendations.appendChild(header);
+                    for (var i = 0; i < data.recommend_movie.length; i++) {
+                        var div = document.createElement('div');
+                        div.classList.add('carousel-item');
+                        var img = document.createElement('img');
+                        img.src = data.recommend_poster[i];
+                        img.alt = data.recommend_movie[i];
+                        div.appendChild(img);
+                        carouselInner.appendChild(div);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,112 @@
+#Box {
+    border-radius: 15px;
+    height: 180px;
+    opacity: 90%;
+    position:relative; left:0px; top:0px;
+    
+}
+body {
+    color: white;
+    background-color: black;
+    background-image: url("images/bg1.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("images/bg1.jpg");
+    background-size: cover;
+    overflow-x: hidden;
+    
+}
+article{
+    position:relative; left:10px; top:10px;
+}
+@font-face {
+    font-display: optional;
+    font-family: Netflix Sans;
+    font-weight: 100;
+    src: url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff2) format("woff2"),url(https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Th.woff) format("woff")
+}
+#over {
+
+    text-align-last:left;
+    font-family: Netflix Sans,Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    letter-spacing: 0!important;
+    display: block;
+    margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    position:relative; left:60px; top:-20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+footer{
+    position:relative; left:10px; top:10px;
+}
+
+li,button{
+    font-weight: inherit;
+    font-family: Netflix Sans,Neue,Segoe UI,Roboto,Ubuntu,sans-serif;
+    display: block;
+    background-color: rgb(45,45,45);
+    border: none;
+    color: #FFFFFF;
+    text-align-last:inherit;
+    font-size: 28px;
+    padding: 20px;
+    position:relative; left:-5px; top:-25px;
+    width: 150px;
+    height: 25px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+    
+}
+#nav{
+    position:relative; left:60px; top:-20px;
+}
+button span {
+    cursor: pointer;
+    display: block;
+    position: relative;
+    transition: 0.5s;
+}
+  
+button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+button:hover span {
+    padding-right: 25px;
+}
+  
+button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+a {
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-seri;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+hr{
+    color: red;
+    height: 5px;
+    width: 30%;
+    border: #3D3C3C;
+}
+#img1{
+    position:relative; 
+    right:250px; 
+    top:-60px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

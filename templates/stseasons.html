@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasons - Stranger Things</title>
+</head>
+<link rel="stylesheet" href="{{ url_for('static', filename='stseason.css') }}">
+<link rel="icon" href="{{ url_for('static', filename='images/icon1.png') }}" type="icon">
+<body>
+    <header>
+        <div >
+            <img id="Box" src="{{ url_for('static', filename='images/bg.jpg') }}" >
+        </div>
+    </header>
+    <main id="main">
+        <section>
+            <h2>Episodes</h2>
+        </section>
+        <article>
+            <table>
+            <thead>
+                <tr>
+                    <td>Seasons</td>
+                    <td>Episodes</td>
+                    <td>Date Released</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>8</td>
+                    <td>July 15, 2016</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>9</td>
+                    <td>October 27, 2017</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>8</td>
+                    <td>July 4, 2019</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>7<br>2</td>
+                    <td>May 27, 2022<br>July 1, 2022</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>8</td>
+                    <td>TBA</td>
+                </tr>
+            </tbody> 
+        </table>
+            <div id="div1">
+            <h2>Season 1:</h2>
+            <p>Set in 1983, in the small town of Hawkins, Indiana, the disappearance of a young boy named Will Byers kicks off a series of supernatural events. Will's friends, Mike, Lucas, and Dustin, along with a mysterious girl named Eleven who possesses psychokinetic abilities, search for him. They uncover a government conspiracy involving the Hawkins National Laboratory, which has opened a rift to an alternate dimension called the Upside Down. The group faces a monstrous creature known as the Demogorgon as they strive to rescue Will.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/b9EkMc79ZSU?si=F5CWMIumrjC6FiI1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><hr align="left" width="90%">
+
+            <h2>Season 2:</h2>
+            <p>Taking place in 1984, a year after the events of the first season, the residents of Hawkins face new challenges. Will, who was trapped in the Upside Down, begins experiencing disturbing visions. A much larger and more malevolent entity known as the Mind Flayer starts to influence events in Hawkins. Eleven returns from hiding and joins her friends in the battle against the supernatural forces threatening their town.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/R1ZXOOLMJ8s?si=NccxXqvqh5-DnUMQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><hr align="left" width="90%">
+
+            <h2>Season 3:</h2>
+            <p>Set during the summer of 1985, Hawkins Mall becomes a central location. A Russian laboratory under the mall secretly opens a portal to the Upside Down, unintentionally releasing the Mind Flayer again. This time, it possesses Billy Hargrove and creates a group of mind-controlled citizens. As Eleven and her friends confront this new threat, they also navigate the challenges of adolescence and changing relationships while trying to save Hawkins once more.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/ut_aTGcCVYg?si=AEsHU_IxorzyEkBq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><hr align="left" width="90%">
+
+            <h2>Season 4</h2>
+            <p>In 1979, at Hawkins National Laboratory, Dr. Brenner conducts experiments on Eleven and other subjects, resulting in a mysterious incident that kills all but Eleven. In 1986, Joyce, Will, Jonathan, and Eleven have moved to California, where Eleven faces bullying and a loss of her powers. Meanwhile, in Hawkins, Nancy and Jonathan deal with a long-distance relationship, and strange occurrences grip the town.Hopper is revealed to be alive but imprisoned in Russia. Joyce and Murray try to rescue him, leading to a betrayal and crash landing. Mike visits Eleven in California, where they discover her powers are waning. Back in Hawkins, strange murders occur, and a new threat, Vecna, emerges from the Upside Down.Eleven undergoes experiments, and her friends work to stop Vecna, who possesses supernatural powers. A series of confrontations ensue, leading to sacrifices and the emergence of a dark storm over Hawkins. Will senses Vecna's continued existence, hinting at more danger ahead.</p>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/mVsJXiI60a0?si=ZfdMcevEEzeG_-f8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/sBEvEcpnG7k?si=uCHcZHb47uGyUqJH" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><hr align="left" width="90%">
+            </div>
+        </article>
+    </main>
+    <footer>
+        <div id="nav">
+                <button><a href="{{ url_for('stmain') }}" target="_blank" id="nav1"><span>Main</span></a></button>
+                <button><a href="{{ url_for('stplot') }}" target="_blank" id="nav1"><span>Overview</span></a></button>
+                <button><a href="{{ url_for('stcast') }}" target="_blank" id="nav1"><span>Cast</span></a></button>
+            
+        </div>
+    </footer>
+</body>
+</html>
